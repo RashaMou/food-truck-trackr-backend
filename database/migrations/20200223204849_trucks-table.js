@@ -3,7 +3,7 @@ exports.up = function(knex) {
     tbl.increments();
     tbl
       .string('truck_name', 128)
-      .notNullabl()
+      .notNullable()
       .unique();
     tbl.string('food_type', 128).notNullable();
     tbl.integer('rating');
