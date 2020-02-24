@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// get trucks by operator is
+// get trucks by operator id
 router.get('/:id', async (req, res) => {
   const trucks = await Users.findByOpId(req.params.id);
   try {
