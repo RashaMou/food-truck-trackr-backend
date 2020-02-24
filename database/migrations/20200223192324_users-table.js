@@ -6,10 +6,12 @@ exports.up = function(knex) {
       .notNullable()
       .unique();
     tbl.string('password', 128).notNullable();
-    tbl.string('name', 128);
+    tbl.string('username', 128);
     tbl.string('avatar', 128);
     tbl.string('role', 8);
   });
 };
 
-exports.down = function(knex) {};
+exports.down = function(knex) {
+  return knex.schema.dropTableIfExists('users');
+};
