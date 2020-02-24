@@ -1,40 +1,69 @@
-const db = require('../../database/dbConfig');
+const express = require('express');
+const router = express.Router();
+const Trucks = require('./trucks-model');
+const Users = require('../users/users-model');
 
-module.exports = {
-  addTruck,
-  findTrucks,
-  findTruckById,
-  findByOpId,
-  updateTruck,
-  updateTruck
-};
+// get all trucks
+router.get('/', async (req, res) => {
+  const trucks = await Trucks.getTrucks();
+  try {
+    if (trucks) {
+      res.status(200).json(trucks);
+    } else res.status(404).json({ error: 'No trucks available.' });
+  } catch (err) {
+    res.status(500).json('Database error', err);
+  }
+});
 
-function addTruck(truck) {
-  return db('trucks').insert(truck, 'id');
-}
+// get trucks by operator is
+router.get('/:id', async (req, res) => {
+  const trucks = await Users.findByOpId(req.params.id);
+  try {
+    if (trucks) {
+      res.status(200).json(trucks);
+    } else
+      res.status(404).json({ error: 'This operator does not have any trucks' });
+  } catch (err) {
+    res.status(500).json('Database error', err);
+  }
+});
 
-function findTrucks() {
-  return db('trucks');
-}
+// add truck
+router.post('/', async (req, res) => {
+  const truck = await Trucks.addTruck(req.body);
 
-function findTruckById(id) {
-  return db('trucks')
-    .where({ id })
-    .first();
-}
+  try {
+    if (truck) {
+      res.status(201).json(truck);
+    } else
+      res.status(404).json({ error: 'This operator does not have any trucks' });
+  } catch (err) {
+    res.status(500).json('Database error', err);
+  }
+});
 
-function findByOpId(operators_id) {
-  return db('trucks').where({ operators_id });
-}
+// edit truck
+router.put('/:id', async (req, res) => {
+  const truck = await Trucks.update(req.params.id, req.body);
+  try {
+    if (truck) {
+      res.status(201).json(truck);
+    } else res.status(404).json({ error: 'No truck found with this ID' });
+  } catch (err) {
+    res.status(500).json('Database error', err);
+  }
+});
 
-function updateTruck(id, changes) {
-  return db('trucks')
-    .where({ id })
-    .update(changes);
-}
+// delete truck
+router.delete('/:id', async (req, res) => {
+  const count = await Trucks.remove(req.params.id);
+  try {
+    if (count > 0) {
+      res.status(200).json(`Truck with id ${id} was deleted`);
+    } else res.status(404).json({ error: 'No truck found with this ID' });
+  } catch (err) {
+    res.status(500).json('Database error', err);
+  }
+});
 
-function updateTruck(id) {
-  return db('trucks')
-    .where({ id })
-    .delete();
-}
+module.exports = router;
