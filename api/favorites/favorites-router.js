@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const Trucks = require('./trucks-model');
-const Users = require('../users/users-model');
 const Favorites = require('./favorites-model');
 
 // get favorites by user id

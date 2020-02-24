@@ -8,8 +8,8 @@ module.exports = {
   updateMenuItem
 };
 
-function addMenuItem(item) {
-  return db('findMenuItemById').insert(item, 'id');
+function addMenuItem(data) {
+  return db('findMenuItemById').insert(data, 'id');
 }
 
 function findMenuItemById(id) {
