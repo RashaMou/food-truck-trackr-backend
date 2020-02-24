@@ -1,20 +1,24 @@
 {
-  "name": "y",
-  "version": "y",
+  "name": "food_truck_trackr_backend",
+  "version": "1.0.0",
   "description": "Backend for Food Truck Tracker app",
-  "main": "y",
-  "repository": "y",
-  "author": "y",
-  "license": "y",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RashaMou/food-truck-trackr-backend.git"
+  },
+  "author": "Rasha Moumneh",
+  "license": "MIT",
   "private": false,
   "scripts": {
     "server": "nodemon index.js",
     "start": "node index.js",
-    "test": "cross-env DB_ENV=testing jest --verbose --runInBand"
+    "test": "jest --watchAll --runInBand"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "helmet": "^3.21.2",

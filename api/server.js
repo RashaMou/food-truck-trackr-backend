@@ -13,7 +13,7 @@ const menuRouter = require('../api/menu/menu-router');
 server.use(cors());
 server.use(helmet());
 server.use(express.json());
-server.use('/api/auth', authRouter);
+server.use('/api', authRouter);
 server.use('/api/users', usersRouter);
 server.use('/api/trucks', trucksRouter);
 server.use('/api/favorites', favoritesRouter);
