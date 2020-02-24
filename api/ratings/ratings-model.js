@@ -4,7 +4,7 @@ module.exports = {
   addRating,
   deleteRating,
   editRating,
-  getRatingByTruckId
+  getRatingByTruckAndUserId
 };
 
 function addRating(data) {
@@ -17,8 +17,8 @@ function getRatingById(id) {
     .first();
 }
 
-function getRatingByTruckId(truck_id) {
-  return db('user-truck-rating').where({ truck_id });
+function getRatingByTruckAndUserId(truck_id, user_id) {
+  return db('user-truck-rating').where({ truck_id, user_id });
 }
 
 function editRating(id, changes) {

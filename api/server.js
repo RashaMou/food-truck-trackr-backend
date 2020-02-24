@@ -8,7 +8,7 @@ const authRouter = require('../api/auth/auth-router');
 const usersRouter = require('../api/users/users-router');
 const trucksRouter = require('../api/trucks/trucks-router');
 const favoritesRouter = require('../api/favorites/favorites-router');
-const menuRouter = require('../api/favorites/menu-router');
+const menuRouter = require('../api/menu/menu-router');
 
 server.use(cors());
 server.use(helmet());

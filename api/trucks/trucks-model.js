@@ -6,11 +6,25 @@ module.exports = {
   findTruckById,
   findByOpId,
   updateTruck,
-  removeTruck
+  removeTruck,
+  getCurrentRating,
+  getTotalRatings
 };
 
 function addTruck(truck) {
   return db('trucks').insert(truck, 'id');
+}
+
+function getCurrentRating(id) {
+  return db('trucks')
+    .select('rating')
+    .where({ id });
+}
+
+function getTotalRatings(id) {
+  return db('trucks')
+    .select('total-number-of-ratings')
+    .where({ id });
 }
 
 function findTrucks() {
