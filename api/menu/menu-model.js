@@ -9,7 +9,7 @@ module.exports = {
 };
 
 function addMenuItem(data) {
-  return db('findMenuItemById').insert(data, 'id');
+  return db('menu').insert(data, 'id');
 }
 
 function findMenuItemById(id) {
