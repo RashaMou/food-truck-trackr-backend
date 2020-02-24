@@ -6,7 +6,7 @@ module.exports = {
   findTruckById,
   findByOpId,
   updateTruck,
-  updateTruck
+  removeTruck
 };
 
 function addTruck(truck) {
@@ -33,8 +33,8 @@ function updateTruck(id, changes) {
     .update(changes);
 }
 
-function updateTruck(id) {
+function removeTruck(id) {
   return db('trucks')
     .where({ id })
-    .delete();
+    .del();
 }

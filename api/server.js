@@ -8,6 +8,7 @@ const authRouter = require('../api/auth/auth-router');
 const usersRouter = require('../api/users/users-router');
 const trucksRouter = require('../api/trucks/trucks-router');
 const favoritesRouter = require('../api/favorites/favorites-router');
+const menuRouter = require('../api/favorites/menu-router');
 
 server.use(cors());
 server.use(helmet());
@@ -16,6 +17,7 @@ server.use('/api/auth', authRouter);
 server.use('/api/users', usersRouter);
 server.use('/api/trucks', trucksRouter);
 server.use('/api/favorites', favoritesRouter);
+server.use('/api/menu', menuRouter);
 
 server.get('/', (req, res) => {
   res.send('welcome to foodtruck trackr');
