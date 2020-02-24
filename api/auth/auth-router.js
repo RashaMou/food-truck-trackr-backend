@@ -15,8 +15,7 @@ router.post('/register', validateRegistration, (req, res) => {
         token: token,
         id: saved.id,
         email: saved.email,
-        role: saved.role,
-        message: `Welcome ${user.username}!`
+        role: saved.role
       });
     })
     .catch(error => {
