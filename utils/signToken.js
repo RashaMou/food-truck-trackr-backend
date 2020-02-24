@@ -1,4 +1,4 @@
-const configSecret = require('../secret');
+const configSecret = require('./secret');
 const jwt = require('jsonwebtoken');
 
 module.exports = user => {
