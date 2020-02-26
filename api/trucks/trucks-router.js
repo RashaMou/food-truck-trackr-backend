@@ -1,4 +1,8 @@
 const express = require('express');
+const storage = require('../../middleware/multer');
+const cloudinary = require('cloudinary').v2;
+const multer = require('multer');
+
 const router = express.Router();
 const Trucks = require('./trucks-model');
 const Users = require('../users/users-model');
@@ -26,6 +30,34 @@ router.get('/operators/:id', async (req, res) => {
   } catch (err) {
     res.status(500).json('Database error', err);
   }
+});
+
+router.post('/upload', (req, res, next) => {
+  const upload = multer({ storage }).single('img');
+  upload(req, res, function(err) {
+    if (err) {
+      return res.send(err);
+    }
+    console.log('file uploaded to server');
+    console.log(req.file);
+
+    const path = req.file.path;
+    const uniqueFilename = new Date().toISOString();
+
+    cloudinary.uploader.upload(
+      path,
+      { public_id: `blog/${uniqueFilename}`, tags: `blog` }, // directory and tags are optional
+      function(err, image) {
+        if (err) return res.send(err);
+        console.log('file uploaded to Cloudinary');
+        // remove file from server
+        const fs = require('fs');
+        fs.unlinkSync(path);
+        // return image details
+        res.json(image);
+      }
+    );
+  });
 });
 
 // add truck
