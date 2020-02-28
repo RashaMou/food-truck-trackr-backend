@@ -4,15 +4,19 @@ const Users = require('../users/users-model');
 const signToken = require('../../utils/signToken');
 const validateRegistration = require('../../middleware/registration-validation');
 
-router.post('/register', async (req, res) => {
+router.post('/register', validateRegistration, async (req, res) => {
   let user = req.body;
   const hash = bcrypt.hashSync(user.password, 10);
-  // user.password = hash;
-  // const token = signToken(user);
+  user.password = hash;
+  const token = signToken(user);
   const newUser = await Users.add(user);
   try {
     if (newUser) {
-      res.status(201).json(user);
+      res.status(201).json({
+        email: newUser.email,
+        token: token,
+        role: newUser.role
+      });
     } else res.status(404);
   } catch (error) {
     console.log(error);
