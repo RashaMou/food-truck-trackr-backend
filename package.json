@@ -13,7 +13,7 @@
   "scripts": {
     "server": "nodemon index.js",
     "start": "node index.js",
-    "test": "jest --watchAll --runInBand"
+    "test": "cross-env DB_ENV=testing jest --verbose --runInBand"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

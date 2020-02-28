@@ -13,11 +13,12 @@ const menuRouter = require('../api/menu/menu-router');
 server.use(cors());
 server.use(helmet());
 server.use(express.json());
-server.use('/api', authRouter);
-server.use('/api/users', usersRouter);
-server.use('/api/trucks', trucksRouter);
-server.use('/api/favorites', favoritesRouter);
-server.use('/api/menu', menuRouter);
+server.use('/api');
+server.use('/', authRouter);
+server.use('/users', usersRouter);
+server.use('/trucks', trucksRouter);
+server.use('/favorites', favoritesRouter);
+server.use('/menu', menuRouter);
 
 server.get('/', (req, res) => {
   res.send('welcome to foodtruck trackr');
