@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Users = require('../users/users-model');
+const registrationValidation = require('../../middleware/registration-validation');
 
 // get all users
 router.get('/', async (req, res) => {
