@@ -1,7 +1,7 @@
 exports.up = function(knex) {
   return knex.schema.createTable('user-truck-rating', tbl => {
     tbl.increments();
-    tbl.decimal('rating', 1, 2).notNullable();
+    tbl.integer('rating').notNullable();
     tbl
       .integer('truck_id')
       .unsigned()
